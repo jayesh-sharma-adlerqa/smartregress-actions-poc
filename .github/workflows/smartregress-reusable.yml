@@ -1,0 +1,26 @@
+name: SmartRegress Reusable (POC)
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        required: false
+        type: string
+        default: "Hello from SmartRegress reusable workflow!"
+    outputs:
+      proof:
+        description: "Just a proof output"
+        value: ${{ jobs.poc.outputs.proof }}
+
+jobs:
+  poc:
+    runs-on: ubuntu-latest
+    outputs:
+      proof: ${{ steps.out.outputs.proof }}
+    steps:
+      - name: Print message
+        run: echo "${{ inputs.message }}"
+
+      - name: Set output
+        id: out
+        run: echo "proof=reusable-workflow-is-working" >> $GITHUB_OUTPUT
