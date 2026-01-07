@@ -1,0 +1,11 @@
+name: Test calling reusable workflow
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  call-reusable:
+    uses: ./.github/workflows/smartregress-reusable.yml
+    with:
+      message: "POC call from inside the same repo"
